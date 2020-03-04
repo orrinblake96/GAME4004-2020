@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class SimplePhysicsController : MonoBehaviour
 {
+    public GameObject nuke;
 
     private float vInput;
     private float hInput;
     private float eInput;
+    private bool nuked = false;
+    private Vector3 origin = new Vector3(0, 0, 0);
 
     private Rigidbody rb;
 
@@ -30,7 +33,13 @@ public class SimplePhysicsController : MonoBehaviour
 
 
         //ADD CHECK FOR DISTANCE AND TRIGGER THE EXPLOSION HERE:
-
+        float dist = Vector3.Distance(origin, transform.position);
+        Debug.Log("Distance from Origin: " + dist);
+        if (dist >= 30.0f && nuked == false)
+        {
+            Instantiate(nuke, origin, Quaternion.identity);
+            nuked = true;
+        }
 
 
 
